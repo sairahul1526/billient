@@ -1,9 +1,21 @@
-<mat-tab-group>
+<button *ngIf="index != 0" mat-fab (click)="buttonClicked()" style="z-index:9999;position: fixed;bottom: 30px;right: 30px;border-radius: 0px;color: black;background-color: white;">
+  <mat-icon>add</mat-icon>
+</button>
+
+<mat-tab-group [(selectedIndex)]="index">
   <mat-tab label="BILLING">
-    <app-billing></app-billing>
+    <ng-template matTabContent>
+      <app-billing></app-billing>
+    </ng-template>
   </mat-tab>
   <mat-tab label="ITEMS">
-    <app-items></app-items>
+    <ng-template matTabContent>
+      <app-items></app-items>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="GO DOWN">
+    <ng-template matTabContent>
+      <app-godown></app-godown>
+    </ng-template>
   </mat-tab>
 </mat-tab-group>
-  

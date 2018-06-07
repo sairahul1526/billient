@@ -6,11 +6,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
-import { MatButtonModule, MatCheckboxModule, MatButtonToggleModule, MatIconModule, MatAutocompleteModule, MatTableModule, MatFormFieldModule, MatPaginatorModule, MatInputModule, MatDialogModule, MatTabsModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatButtonToggleModule, MatIconModule, MatAutocompleteModule, MatTableModule, MatFormFieldModule, MatPaginatorModule, MatInputModule, MatDialogModule, MatTabsModule, MatExpansionModule, MatCardModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { ItemsComponent, EditItemDialog, AddItemDialog } from './pages/items/items.component';
 import { BillingComponent } from './pages/billing/billing.component';
+import { GodownComponent } from './pages/godown/godown.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { BillingComponent } from './pages/billing/billing.component';
     EditItemDialog,
     AddItemDialog,
     ItemsComponent,
-    BillingComponent
+    BillingComponent,
+    GodownComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,7 @@ import { BillingComponent } from './pages/billing/billing.component';
     FormsModule, ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    MatButtonModule, MatCheckboxModule, MatButtonToggleModule, MatIconModule, MatAutocompleteModule, MatTableModule, MatFormFieldModule, MatPaginatorModule, MatInputModule, MatDialogModule, MatTabsModule
+    MatButtonModule, MatCheckboxModule, MatButtonToggleModule, MatIconModule, MatAutocompleteModule, MatTableModule, MatFormFieldModule, MatPaginatorModule, MatInputModule, MatDialogModule, MatTabsModule, MatExpansionModule, MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent],

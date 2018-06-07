@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-items',
@@ -19,13 +19,17 @@ export class ItemsComponent implements OnInit {
   items: any[];
 
   constructor(private db: AngularFireDatabase, public dialog: MatDialog) {
-    this.db.list('/items').valueChanges().subscribe(countries => {  
-        this.items = countries;  
-        console.log(this.items);
+    this.db.list('/items').snapshotChanges()
+      .subscribe(actions => {
+        this.items = [];
+        actions.forEach(action => {
+          let temp = action.payload.val();
+          this.items.push({$key: action.key, name: temp['name'], quantity: temp['quantity'], price: temp['price']})
+        });
         this.dataSource = new MatTableDataSource(this.items);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-    });
+      });
   }
 
   ngOnInit() {
@@ -40,23 +44,8 @@ export class ItemsComponent implements OnInit {
     }
   }
 
-  add() {
-    let dialogRef = this.dialog.open(AddItemDialog, {
-      width: '250px',
-      data: { name: "", quantity: "", price: "" }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.dir(result);
-      if (result) {
-        let pushed = this.db.list('/items').push({name: result.name, quantity: result.quantity, price: result.price })
-        this.db.list('/items').update(pushed.key, { id: pushed.key });
-      }
-    });
-  }
-
   delete(item) {
-    this.db.list('/items').remove(item.id);
+    this.db.list('/items').remove(item.$key);
   }
 
   change(item, changeCol) {
@@ -72,7 +61,7 @@ export class ItemsComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         if (result && result.var) {
-          this.db.list('/items').update(item.id, { name: result.var });
+          this.db.list('/items').update(item.$key, { name: result.var });
         }
       });
     } else if (changeCol == 2) {
@@ -83,7 +72,7 @@ export class ItemsComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         if (result && result.var) {
-          this.db.list('/items').update(item.id, { quantity: result.var });
+          this.db.list('/items').update(item.$key, { quantity: result.var });
         }
       });
     } else {
@@ -94,7 +83,7 @@ export class ItemsComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         if (result && result.var) {
-          this.db.list('/items').update(item.id, { price: result.var });
+          this.db.list('/items').update(item.$key, { price:  Number(result.var) });
         }
       });
     }
@@ -102,7 +91,7 @@ export class ItemsComponent implements OnInit {
 }
 
 export interface ItemData {
-  id: string;
+  $key: string;
   name: string;
   quantity: string;
   price: number;

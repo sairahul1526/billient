@@ -50,7 +50,6 @@ export class BillingComponent implements OnInit {
   constructor(private db: AngularFireDatabase, public dialog: MatDialog) {
     this.db.list('/items').valueChanges().subscribe(countries => {  
         this.states = countries;
-        console.log(this.states);
     });
     this.stateCtrl = new FormControl();
     this.filteredStates = this.stateCtrl.valueChanges
