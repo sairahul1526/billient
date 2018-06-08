@@ -28,7 +28,22 @@ export class AppComponent implements OnInit {
       this.addItem();
     } else if (this.index == 2) {
       this.addGoDown();
+    } else if (this.index == 3) {
+      this.addDebt();
     }
+  }
+
+  addDebt() {
+    let dialogRef = this.dialog.open(EditItemDialog, {
+      width: '250px',
+      data: { name: "", change: "Add Customer", type: "text", var: "" }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.var) {
+        this.db.list('/debts').push({ name: result.var });
+      }
+    });    
   }
 
   addItem() {

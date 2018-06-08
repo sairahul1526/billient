@@ -18,6 +18,8 @@ export class ItemsComponent implements OnInit {
 
   items: any[];
 
+  filterValue = "";
+
   constructor(private db: AngularFireDatabase, public dialog: MatDialog) {
     this.db.list('/items').snapshotChanges()
       .subscribe(actions => {
@@ -29,6 +31,7 @@ export class ItemsComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.items);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.applyFilter(this.filterValue);
       });
   }
 

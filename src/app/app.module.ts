@@ -6,12 +6,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
-import { MatButtonModule, MatCheckboxModule, MatButtonToggleModule, MatIconModule, MatAutocompleteModule, MatTableModule, MatFormFieldModule, MatPaginatorModule, MatInputModule, MatDialogModule, MatTabsModule, MatExpansionModule, MatCardModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatButtonToggleModule, MatIconModule, MatAutocompleteModule, MatTableModule, MatFormFieldModule, MatPaginatorModule, MatInputModule, MatDialogModule, MatTabsModule, MatExpansionModule, MatCardModule, MatMenuModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { ItemsComponent, EditItemDialog, AddItemDialog } from './pages/items/items.component';
 import { BillingComponent } from './pages/billing/billing.component';
 import { GodownComponent } from './pages/godown/godown.component';
+import { DebtsComponent } from './pages/debts/debts.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { GodownComponent } from './pages/godown/godown.component';
     AddItemDialog,
     ItemsComponent,
     BillingComponent,
-    GodownComponent
+    GodownComponent,
+    DebtsComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,7 @@ import { GodownComponent } from './pages/godown/godown.component';
     FormsModule, ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    MatButtonModule, MatCheckboxModule, MatButtonToggleModule, MatIconModule, MatAutocompleteModule, MatTableModule, MatFormFieldModule, MatPaginatorModule, MatInputModule, MatDialogModule, MatTabsModule, MatExpansionModule, MatCardModule
+    MatButtonModule, MatCheckboxModule, MatButtonToggleModule, MatIconModule, MatAutocompleteModule, MatTableModule, MatFormFieldModule, MatPaginatorModule, MatInputModule, MatDialogModule, MatTabsModule, MatExpansionModule, MatCardModule, MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent],

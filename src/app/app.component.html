@@ -4,18 +4,19 @@
 
 <mat-tab-group [(selectedIndex)]="index">
   <mat-tab label="BILLING">
-    <ng-template matTabContent>
-      <app-billing></app-billing>
-    </ng-template>
+    <app-billing></app-billing>
   </mat-tab>
   <mat-tab label="ITEMS">
-    <ng-template matTabContent>
-      <app-items></app-items>
-    </ng-template>
+    <app-items></app-items>
   </mat-tab>
-  <mat-tab label="GO DOWN">
+  <mat-tab label="STOCK">
     <ng-template matTabContent>
       <app-godown></app-godown>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="DEBTS">
+    <ng-template matTabContent>
+      <app-debts></app-debts>
     </ng-template>
   </mat-tab>
 </mat-tab-group>

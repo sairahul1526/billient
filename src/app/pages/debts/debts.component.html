@@ -1,0 +1,59 @@
+<mat-card>
+  <mat-form-field style="width: 100%">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search for items" [(ngModel)]="filterValue">
+  </mat-form-field>
+
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="i == step" *ngFor="let customer of filteredCustomers; let i = index" (opened)="setStep(i)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ customer.name }}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ getTotal(customer.payments) }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <table mat-table [dataSource]="customer.payments" matSort class="mat-elevation-z8">
+    
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="add(customer, 1)">Add Debt</button>
+              <button mat-menu-item (click)="add(customer, 2)">Add Payment</button>
+              <button mat-menu-item (click)="add(customer, 3)">Clear All</button>
+            </mat-menu>
+          </th>
+          <td mat-cell *matCellDef="let row" (click)="delete(customer.$key, row.id)">
+            <button mat-icon-button>
+              <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+            </button> 
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="payment">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Payment </th>
+          <td mat-cell *matCellDef="let row">
+            {{row.payment}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+          <td mat-cell *matCellDef="let row">
+            {{row.date | date: 'fullDate'}}
+          </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+      </table>
+      
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-card>
+  

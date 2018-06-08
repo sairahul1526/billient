@@ -6,52 +6,50 @@
           {{ godown.name }}
         </mat-panel-title>
         <mat-panel-description>
-          Type your name and age
+          
         </mat-panel-description>
       </mat-expansion-panel-header>
+
+      <table mat-table [dataSource]="godown.items" matSort class="mat-elevation-z8">
+    
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <button mat-icon-button (click)="addItem(godown)">
+              <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+            </button> 
+          </th>
+          <td mat-cell *matCellDef="let row" (click)="delete(godown.$key, row.id)">
+            <button mat-icon-button>
+              <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+            </button> 
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let row" (click)='change(row, 1)'>
+            {{row.name}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button (click)="add(godown.$key, row.id, row.quantity)">
+              <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+            </button> 
+            {{row.quantity}}
+            <button mat-icon-button (click)="minus(godown.$key, row.id, row.quantity)">
+              <mat-icon aria-label="Example icon-button with a heart icon">remove</mat-icon>
+            </button> 
+          </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+      </table>
       
-      <mat-card>
-        <table mat-table [dataSource]="godown.items" matSort class="mat-elevation-z8">
-      
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              <button mat-icon-button (click)="addItem(godown)">
-                <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-              </button> 
-            </th>
-            <td mat-cell *matCellDef="let row" (click)="delete(godown.$key, row.id)">
-              <button mat-icon-button>
-                <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
-              </button> 
-            </td>
-          </ng-container>
-      
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-            <td mat-cell *matCellDef="let row" (click)='change(row, 1)'>
-              {{row.name}}
-            </td>
-          </ng-container>
-      
-          <ng-container matColumnDef="quantity">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
-            <td mat-cell *matCellDef="let row">
-              <button mat-icon-button (click)="add(godown.$key, row.id, row.quantity)">
-                <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-              </button> 
-              {{row.quantity}}
-              <button mat-icon-button (click)="minus(godown.$key, row.id, row.quantity)">
-                <mat-icon aria-label="Example icon-button with a heart icon">remove</mat-icon>
-              </button> 
-            </td>
-          </ng-container>
-      
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-          </tr>
-        </table>
-      
-      </mat-card>
     </mat-expansion-panel>
   </mat-accordion>
 </mat-card>
