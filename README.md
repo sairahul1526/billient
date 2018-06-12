@@ -1,5 +1,8 @@
 # Billient
 
+![Alt Text](https://github.com/sairahul1526/billient/blob/master/gifs/Jun-12-2018%2012-22-33.gif?raw=true)
+![Alt Text](https://github.com/sairahul1526/billient/blob/master/gifs/Jun-12-2018%2012-23-17.gif?raw=true)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.7.
 
 ## Development server
